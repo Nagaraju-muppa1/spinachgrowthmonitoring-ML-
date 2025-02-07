@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+    .bgm:hover{
+        background-color: blue;
+    }
+    .hero{
+    width:1500px;
+    height:650px;
+    background-color: rgb(236,239,236);
+    border-radius:15px;
+    margin-top:10px;
+}
+.inp{
+    display:none;
+}
+.labels{
+    display:block;
+    width:200px;
+    background-color: #e3362c;
+    padding:12px;
+    margin:10px auto;
+    color:#fff;
+    cursor:pointer;
+    border-radius:15px;    
+}
+</style>
+
+</head>
+<body style="background-color:rgba(245,247,249,255);">
+    
+
+<div class="container " style="width:500px;background-color: rgba(255,255,255,255); margin-top: 170px; border-radius: 10px;">
+    <div class="text-center">
+        <h1 class="h2 mt-5 mb-5  d-md-flex justify-content-center">
+        
+            <span style="font-weight: bold;">Sign In</span>
+        </h1>
+
+    </div>
+    
+    <div class="container align-content-center ">
+        <div class="text-center" >
+            <form class="justify-content-center" >
+                
+                <input type="email" id="email" class="form-control ftext mb-3 ml-5" style="width:400px;margin-left: 21px;" placeholder="Email address" required>
+                <input type="password" id="password" class="form-control ftext mb-3 ml-3" style="width:400px;margin-left: 21px;" placeholder="Password" required>
+                <button type="submit" class="btn btn-sign ml mb-4" style="width:400px; border-radius:50px;color:white;background-color: rgba(58,127,249,255); " onclick={saveDetails(event)}>Sign In</button>
+            </form>
+            <p class="mb-4">or</p>
+            <p>Don't have an account?<a href="Signup.html">Signup</a> </p>
+               
+    </div>
+    
+    </div>
+</div>        
+
+ 
+<footer class="footcolor " style="height:100px;">
+            
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+async function saveDetails(event){
+        event.preventDefault();
+        const email=document.getElementById("email").value;
+        const password=document.getElementById("password").value;
+    
+      
+    const url = `http://localhost:8000/api/signin?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+        try{
+            const response= await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+         
+          })
+          if(response.ok){
+            const data= await response.json();
+           
+            window.location.href = 'C:\\Users\\navya\\OneDrive\\Desktop\\project\\frontend\\Home.html';
+            alert("User login successfully");
+          }
+        else{
+            alert("User email donot exist");
+        }
+
+    }
+      catch(error){
+        console.log(error);
+        alert("invalid");
+      }
+    }
+</script>
+
+    </body>
+</html>
+
+
